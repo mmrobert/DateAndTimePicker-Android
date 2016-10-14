@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">DateTimePicker</string>
+    <string name="tab_date">Date</string>
+    <string name="tab_time">Time</string>
+</resources>

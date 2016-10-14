@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.homearound.www.homearound.CustomerJobDetailActivity"
+    tools:showIn="@layout/activity_customer_job_detail">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:paddingLeft="6dp"
+            android:paddingRight="6dp">
+
+            <TextView
+                android:id="@+id/job_detail_status_c"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:text="status"
+                android:textSize="18sp"
+                android:maxLines="1"
+                android:minLines="1"/>
+
+            <TextView
+                android:id="@+id/job_detail_change_status_c"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="6dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:text="status"
+                android:textSize="18sp"
+                android:textColor="@color/colorPrimary"
+                android:maxLines="1"
+                android:minLines="1"/>
+
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_toLeftOf="@id/job_detail_change_status_c"
+                android:layout_centerVertical="true"
+                android:src="@drawable/happy"
+                android:scaleType="centerCrop"/>
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            android:background="@color/colorDivider"/>
+
+        <TextView
+            android:id="@+id/job_detail_category_c"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:paddingLeft="6dp"
+            android:paddingRight="6dp"
+            android:text="category"
+            android:textSize="20sp"
+            android:textColor="@color/colorPrimaryText"
+            android:maxLines="1"
+            android:minLines="1"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorDivider"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:paddingLeft="6dp"
+                android:paddingRight="6dp"
+                android:text="Job Title"
+                android:textSize="12sp"
+                android:minLines="1"/>
+
+            <TextView
+                android:id="@+id/job_detail_title_c"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:paddingLeft="6dp"
+                android:paddingRight="6dp"
+                android:gravity="end"
+                android:text="title"
+                android:textSize="18sp"
+                android:textColor="@color/colorPrimaryText"
+                android:minLines="1"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:paddingLeft="6dp"
+            android:paddingRight="6dp"
+            android:background="@color/colorDivider"
+            android:text="Time to Finish"
+            android:textSize="12sp"
+            android:minLines="1"/>
+
+            <TextView
+                android:id="@+id/job_detail_timefinish_c"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:paddingLeft="6dp"
+                android:paddingRight="6dp"
+                android:gravity="end"
+                android:text="time to finish"
+                android:textSize="18sp"
+                android:textColor="@color/colorPrimaryText"
+                android:minLines="1"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:paddingLeft="6dp"
+            android:paddingRight="6dp"
+            android:background="@color/colorDivider"
+            android:text="Job Detail"
+            android:textSize="12sp"
+            android:minLines="1"/>
+
+            <TextView
+                android:id="@+id/job_detail_detail_c"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:paddingLeft="6dp"
+                android:paddingRight="6dp"
+                android:gravity="end"
+                android:text="detail"
+                android:textSize="18sp"
+                android:textColor="@color/colorPrimaryText"
+                android:minLines="1"/>
+
+        <Button
+            android:id="@+id/job_detail_deletejob_c"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@color/colorRed210"
+            android:minHeight="0dp"
+            android:minWidth="0dp"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp"
+            android:paddingLeft="60dp"
+            android:paddingRight="60dp"
+            android:gravity="center"
+            android:text="Delete This Job"
+            android:textColor="@color/colorWhite"
+            android:textSize="18sp"/>
+
+
+    </LinearLayout>
+
+</ScrollView>

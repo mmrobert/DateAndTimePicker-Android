@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">HomeAround</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_customer_job_detail">Job Detail</string>
+    <string name="title_activity_customer_job_title_edit">Job Title</string>
+    <string name="title_activity_customer_job_detail_edit">Job Detail</string>
+</resources>

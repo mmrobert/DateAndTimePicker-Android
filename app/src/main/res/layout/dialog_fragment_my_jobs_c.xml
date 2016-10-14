@@ -1,0 +1,31 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/dialog_fragment_my_jobs_c"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="18dp"
+    android:paddingBottom="18dp"
+    android:paddingLeft="8dp"
+    android:paddingRight="8dp"
+    android:layout_gravity="center"
+    tools:context="com.homearound.www.homearound.DialogFragmentMyJobsC">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <Button
+        android:id="@+id/dialog_button_ok_my_jobs_c"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:text="Ok"/>
+
+    <Button
+        android:id="@+id/dialog_button_cancel_my_jobs_c"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/dialog_button_ok_my_jobs_c"
+        android:text="Cancel"/>
+
+</RelativeLayout>
