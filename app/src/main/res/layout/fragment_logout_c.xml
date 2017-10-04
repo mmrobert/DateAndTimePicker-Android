@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.homearound.www.homearound.FragmentLogoutC">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <Button
+        android:id="@+id/btn_logout_logout_c"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_gravity="center"
+        android:background="@color/colorGreenBtn"
+        android:textColor="@color/colorWhite"
+        android:text="Log Out"/>
+
+    <ImageView
+        android:layout_width="208dp"
+        android:layout_height="208dp"
+        android:layout_marginTop="38dp"
+        android:layout_gravity="center"
+        android:src="@drawable/homeicon"
+        android:scaleType="centerCrop"/>
+
+</LinearLayout>

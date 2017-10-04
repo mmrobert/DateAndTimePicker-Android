@@ -15,7 +15,7 @@
         android:theme="@style/AppTheme.AppBarOverlay">
 
         <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar_my_jobs_c"
+            android:id="@+id/toolbar_customer_nv"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
@@ -24,13 +24,10 @@
     </android.support.design.widget.AppBarLayout>
 
     <FrameLayout
-        android:id="@+id/nv_fragment_holder"
+        android:id="@+id/nv_fragment_holder_customer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingBottom="6dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:paddingTop="6dp"
+        android:padding="0dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" >
 
     </FrameLayout>

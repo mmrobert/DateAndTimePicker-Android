@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/dialog_fragment_photo"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="18dp"
+    android:paddingBottom="18dp"
+    android:paddingLeft="25dp"
+    android:paddingRight="25dp"
+    android:layout_gravity="center"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    tools:context="com.homearound.www.homearound.DialogFragmentPhoto">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <Button
+        android:id="@+id/dialog_button_choose_gallery"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="25dp"
+        android:paddingRight="25dp"
+        android:background="@null"
+        android:textColor="@color/colorAccent"
+        android:text="Choose from Albums"/>
+
+    <Button
+        android:id="@+id/dialog_button_take_photo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#00000000"
+        android:textColor="@color/colorAccent"
+        android:text="Take Photo"/>
+
+    <Button
+        android:id="@+id/dialog_button_cancel_photo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:textColor="@color/colorAccent"
+        android:text="Cancel"/>
+
+</LinearLayout>

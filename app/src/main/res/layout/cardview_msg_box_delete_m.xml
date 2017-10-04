@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cvItem_msg_box_delete_m"
+    android:layout_gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="6dp"
+    card_view:cardCornerRadius="4dp"
+    card_view:cardBackgroundColor="@color/colorDarkedGrey">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="8dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:paddingTop="8dp">
+
+        <Button
+            android:id="@+id/btn_msg_box_delete_m"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/roundeddeletemsgboxbtn"
+            android:minHeight="22dp"
+            android:minWidth="56dp"
+            android:textSize="12sp"
+            android:textColor="@color/colorWhite"
+            android:text="Delete"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_toLeftOf="@id/btn_msg_box_delete_m"
+            android:layout_marginRight="8dp"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/txt_msg_box_time_delete_m"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:text="time"
+                    android:textSize="15sp"
+                    android:maxLines="1"
+                    android:minLines="1"/>
+
+                <TextView
+                    android:id="@+id/txt_msg_box_name_delete_m"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_toLeftOf="@id/txt_msg_box_time_delete_m"
+                    android:layout_alignBaseline="@id/txt_msg_box_time_delete_m"
+                    android:textColor="@color/colorPrimaryText"
+                    android:text="name"
+                    android:textSize="18sp"
+                    android:maxLines="1"
+                    android:minLines="1"/>
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/txt_msg_box_msg_delete_m"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="detail"
+                android:textSize="16sp"
+                android:maxLines="2"
+                android:minLines="1"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>

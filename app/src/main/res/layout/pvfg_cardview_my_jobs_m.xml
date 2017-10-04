@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cvItem_my_jobs_m"
+    android:layout_gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="6dp"
+    card_view:cardCornerRadius="4dp"
+    card_view:cardBackgroundColor="@color/colorDarkedGrey">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="8dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:paddingTop="8dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txt_my_job_title_m"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="title"
+            android:textColor="@color/colorPrimaryText"
+            android:textSize="16sp"
+            android:maxLines="1"
+            android:minLines="1"/>
+
+        <TextView
+            android:id="@+id/txt_my_job_distance_m"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:gravity="right"
+            android:text="distance"
+            android:textSize="16sp"
+            android:maxLines="1"
+            android:minLines="1"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp">
+
+            <TextView
+                android:id="@+id/txt_my_job_posted_by_label_m"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:text="Posted by:"
+                android:textSize="14sp"
+                android:maxLines="1"
+                android:minLines="1"/>
+
+            <TextView
+                android:id="@+id/txt_my_job_name_m"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="6dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_toRightOf="@id/txt_my_job_posted_by_label_m"
+                android:layout_alignBaseline="@id/txt_my_job_posted_by_label_m"
+                android:gravity="left"
+                android:text="name"
+                android:textSize="16sp"
+                android:textColor="@color/colorPrimaryText"
+                android:maxLines="1"
+                android:minLines="1"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp">
+
+            <TextView
+                android:id="@+id/txt_my_job_timefinish_label_m"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:text="Time to Finish:"
+                android:textSize="14sp"
+                android:maxLines="1"
+                android:minLines="1"/>
+
+            <TextView
+                android:id="@+id/txt_my_job_timefinish_m"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="6dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_toRightOf="@id/txt_my_job_timefinish_label_m"
+                android:layout_alignBaseline="@id/txt_my_job_timefinish_label_m"
+                android:gravity="right"
+                android:text="time"
+                android:textSize="16sp"
+                android:textColor="@color/colorPrimaryText"
+                android:maxLines="1"
+                android:minLines="1"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>

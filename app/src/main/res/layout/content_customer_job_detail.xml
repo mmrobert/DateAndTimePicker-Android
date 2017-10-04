@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:scrollbars="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.homearound.www.homearound.CustomerJobDetailActivity"
     tools:showIn="@layout/activity_customer_job_detail">
@@ -43,7 +44,7 @@
                 android:layout_alignParentEnd="true"
                 android:text="status"
                 android:textSize="18sp"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/colorOrangeBtn"
                 android:maxLines="1"
                 android:minLines="1"/>
 
@@ -85,6 +86,7 @@
                 android:paddingLeft="6dp"
                 android:paddingRight="6dp"
                 android:text="Job Title"
+                android:textColor="@color/colorWhite"
                 android:textSize="12sp"
                 android:minLines="1"/>
 
@@ -97,7 +99,7 @@
                 android:paddingLeft="6dp"
                 android:paddingRight="6dp"
                 android:gravity="end"
-                android:text="title"
+                android:hint="Enter job title"
                 android:textSize="18sp"
                 android:textColor="@color/colorPrimaryText"
                 android:minLines="1"/>
@@ -111,6 +113,7 @@
             android:paddingRight="6dp"
             android:background="@color/colorDivider"
             android:text="Time to Finish"
+            android:textColor="@color/colorWhite"
             android:textSize="12sp"
             android:minLines="1"/>
 
@@ -123,7 +126,7 @@
                 android:paddingLeft="6dp"
                 android:paddingRight="6dp"
                 android:gravity="end"
-                android:text="time to finish"
+                android:hint="Choose time to finish"
                 android:textSize="18sp"
                 android:textColor="@color/colorPrimaryText"
                 android:minLines="1"/>
@@ -137,6 +140,7 @@
             android:paddingRight="6dp"
             android:background="@color/colorDivider"
             android:text="Job Detail"
+            android:textColor="@color/colorWhite"
             android:textSize="12sp"
             android:minLines="1"/>
 
@@ -149,7 +153,7 @@
                 android:paddingLeft="6dp"
                 android:paddingRight="6dp"
                 android:gravity="end"
-                android:text="detail"
+                android:hint="Enter job detail"
                 android:textSize="18sp"
                 android:textColor="@color/colorPrimaryText"
                 android:minLines="1"/>
@@ -170,7 +174,6 @@
             android:text="Delete This Job"
             android:textColor="@color/colorWhite"
             android:textSize="18sp"/>
-
 
     </LinearLayout>
 

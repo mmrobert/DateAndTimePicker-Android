@@ -50,7 +50,7 @@ public class GeneratorClass {
 
         merchantjob.addIdProperty().primaryKey().autoincrement();
         merchantjob.addStringProperty("distance");
-        merchantjob.addDoubleProperty("email");
+        merchantjob.addStringProperty("email");
         merchantjob.addStringProperty("jobdetail");
         merchantjob.addStringProperty("jobstatus");
         merchantjob.addStringProperty("jobtitle");

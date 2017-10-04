@@ -8,7 +8,7 @@ public class MerchantJob {
 
     private Long id;
     private String distance;
-    private Double email;
+    private String email;
     private String jobdetail;
     private String jobstatus;
     private String jobtitle;
@@ -23,7 +23,7 @@ public class MerchantJob {
         this.id = id;
     }
 
-    public MerchantJob(Long id, String distance, Double email, String jobdetail, String jobstatus, String jobtitle, String name, String timefinish, String timepost) {
+    public MerchantJob(Long id, String distance, String email, String jobdetail, String jobstatus, String jobtitle, String name, String timefinish, String timepost) {
         this.id = id;
         this.distance = distance;
         this.email = email;
@@ -51,11 +51,11 @@ public class MerchantJob {
         this.distance = distance;
     }
 
-    public Double getEmail() {
+    public String getEmail() {
         return email;
     }
 
-    public void setEmail(Double email) {
+    public void setEmail(String email) {
         this.email = email;
     }
 

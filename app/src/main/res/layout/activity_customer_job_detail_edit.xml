@@ -22,6 +22,33 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_customer_job_detail_edit" />
+    <RelativeLayout
+        android:id="@+id/rel_job_detail_edit_c"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:descendantFocusability="beforeDescendants"
+        android:focusableInTouchMode="true">
+
+        <EditText
+            android:id="@+id/et_job_detail_edit_c"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="enter your job detail"
+            android:inputType="text|textCapSentences|textMultiLine"
+            android:enabled="true"
+            android:minLines="1"
+            android:maxLines="8"
+            android:isScrollContainer="true"
+            android:scrollbars="vertical"
+            android:imeOptions="actionDone"
+            android:textSize="18sp">
+        </EditText>
+
+    </RelativeLayout>
 
 </android.support.design.widget.CoordinatorLayout>

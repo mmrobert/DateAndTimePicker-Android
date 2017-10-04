@@ -92,5 +92,4 @@ public class DialogFragmentMyJobsC extends DialogFragment {
 
         return rootView;
     }
-
 }

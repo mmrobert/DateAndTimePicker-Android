@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cvItem_ratings_reviews_overall_m"
+    android:layout_gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="6dp"
+    card_view:cardCornerRadius="4dp"
+    card_view:cardBackgroundColor="@color/colorDarkedGrey">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="8dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:paddingTop="8dp">
+
+        <TextView
+            android:id="@+id/txt_ratings_reviews_overall_position_m"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="20dp"
+            android:text="Overall:"
+            android:textSize="18sp"
+            android:maxLines="1"
+            android:minLines="1"/>
+
+        <LinearLayout
+            android:id="@+id/line_ratings_reviews_position_m"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@id/txt_ratings_reviews_overall_position_m"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="6dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/txt_ratings_reviews_overall_value_m"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:textColor="@color/colorOrangeBtn"
+                android:text="4.66"
+                android:textSize="16sp"
+                android:maxLines="1"
+                android:minLines="1"/>
+
+            <ImageView
+                android:id="@+id/img_ratings_reviews_overall_star1_m"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_marginLeft="15dp"
+                android:src="@drawable/stargrey"
+                android:scaleType="centerCrop"/>
+
+            <ImageView
+                android:id="@+id/img_ratings_reviews_overall_star2_m"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_marginLeft="5dp"
+                android:src="@drawable/stargrey"
+                android:scaleType="centerCrop"/>
+
+            <ImageView
+                android:id="@+id/img_ratings_reviews_overall_star3_m"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_marginLeft="5dp"
+                android:src="@drawable/stargrey"
+                android:scaleType="centerCrop"/>
+
+            <ImageView
+                android:id="@+id/img_ratings_reviews_overall_star4_m"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_marginLeft="5dp"
+                android:src="@drawable/stargrey"
+                android:scaleType="centerCrop"/>
+
+            <ImageView
+                android:id="@+id/img_ratings_reviews_overall_star5_m"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_marginLeft="5dp"
+                android:src="@drawable/stargrey"
+                android:scaleType="centerCrop"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/txt_ratings_reviews_overall_review_no_m"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@id/line_ratings_reviews_position_m"
+            android:layout_marginLeft="40dp"
+            android:text="10 reviews"
+            android:textColor="@color/colorPrimaryText"
+            android:textSize="14sp"
+            android:minLines="1"
+            android:maxLines="1"/>
+
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>

@@ -18,9 +18,9 @@ android:textAppearance="@style/TextAppearance.AppCompat.Body1"
 
     <de.hdodenhof.circleimageview.CircleImageView
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/profile_image"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:id="@+id/img_profile_photo_customer"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
         android:paddingTop="2dp"
         android:paddingLeft="0dp"
         android:paddingRight="0dp"
@@ -30,13 +30,14 @@ android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         app:civ_border_color="@color/colorDivider"/>
 
     <TextView
+        android:id="@+id/txt_profile_name_customer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="2dp"
         android:paddingBottom="6dp"
-        android:paddingLeft="0dp"
-        android:paddingRight="0dp"
-        android:text="Android Studio"
+        android:paddingLeft="10dp"
+        android:paddingRight="6dp"
+        android:text="Name"
         android:textColor="@color/colorPrimaryText" />
 
 </LinearLayout>

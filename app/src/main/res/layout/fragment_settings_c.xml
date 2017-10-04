@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content_fragment_settings_c"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:scrollbars="vertical"
+    tools:context="com.homearound.www.homearound.FragmentSettingsC">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:descendantFocusability="beforeDescendants"
+        android:focusableInTouchMode="true">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/img_settings_photo_customer"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/user"
+            app:civ_border_width="1dp"
+            app:civ_border_color="@color/colorDivider"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="3dp"
+            android:paddingBottom="3dp"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:background="@color/colorDivider"
+            android:text="Name"
+            android:textColor="@color/colorWhite"
+            android:textSize="15sp"
+            android:minLines="1"/>
+
+        <TextView
+            android:id="@+id/txt_settings_name_c"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:gravity="right"
+            android:hint="Your name"
+            android:textSize="16sp"
+            android:textColor="@color/colorSecondaryText"
+            android:minLines="1"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="3dp"
+            android:paddingBottom="3dp"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:background="@color/colorDivider"
+            android:text="Postal Code (match the best services nearby)"
+            android:textColor="@color/colorWhite"
+            android:textSize="15sp"
+            android:minLines="1"
+            android:maxLines="1"/>
+
+        <TextView
+            android:id="@+id/txt_settings_post_code_c"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:gravity="right"
+            android:hint="Your postal code"
+            android:textSize="16sp"
+            android:textColor="@color/colorSecondaryText"
+            android:minLines="1"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="3dp"
+            android:paddingBottom="3dp"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:background="@color/colorDivider"
+            android:text="Country"
+            android:textColor="@color/colorWhite"
+            android:textSize="15sp"
+            android:minLines="1"
+            android:maxLines="1"/>
+
+        <TextView
+            android:id="@+id/txt_settings_country_c"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="6dp"
+            android:paddingTop="2dp"
+            android:paddingBottom="2dp"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:hint="Your country"
+            android:gravity="right"
+            android:textColor="@color/colorSecondaryText"
+            android:textSize="16sp"
+            android:minLines="1"
+            android:maxLines="1"/>
+
+    </LinearLayout>
+
+</ScrollView>

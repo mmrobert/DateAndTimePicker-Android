@@ -25,7 +25,7 @@ public class MerchantJobDao extends AbstractDao<MerchantJob, Long> {
     public static class Properties {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
         public final static Property Distance = new Property(1, String.class, "distance", false, "DISTANCE");
-        public final static Property Email = new Property(2, Double.class, "email", false, "EMAIL");
+        public final static Property Email = new Property(2, String.class, "email", false, "EMAIL");
         public final static Property Jobdetail = new Property(3, String.class, "jobdetail", false, "JOBDETAIL");
         public final static Property Jobstatus = new Property(4, String.class, "jobstatus", false, "JOBSTATUS");
         public final static Property Jobtitle = new Property(5, String.class, "jobtitle", false, "JOBTITLE");
@@ -49,7 +49,7 @@ public class MerchantJobDao extends AbstractDao<MerchantJob, Long> {
         db.execSQL("CREATE TABLE " + constraint + "\"MERCHANT_JOB\" (" + //
                 "\"_id\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: id
                 "\"DISTANCE\" TEXT," + // 1: distance
-                "\"EMAIL\" REAL," + // 2: email
+                "\"EMAIL\" TEXT," + // 2: email
                 "\"JOBDETAIL\" TEXT," + // 3: jobdetail
                 "\"JOBSTATUS\" TEXT," + // 4: jobstatus
                 "\"JOBTITLE\" TEXT," + // 5: jobtitle
@@ -79,9 +79,9 @@ public class MerchantJobDao extends AbstractDao<MerchantJob, Long> {
             stmt.bindString(2, distance);
         }
  
-        Double email = entity.getEmail();
+        String email = entity.getEmail();
         if (email != null) {
-            stmt.bindDouble(3, email);
+            stmt.bindString(3, email);
         }
  
         String jobdetail = entity.getJobdetail();
@@ -127,7 +127,7 @@ public class MerchantJobDao extends AbstractDao<MerchantJob, Long> {
         MerchantJob entity = new MerchantJob( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
             cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // distance
-            cursor.isNull(offset + 2) ? null : cursor.getDouble(offset + 2), // email
+            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // email
             cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // jobdetail
             cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // jobstatus
             cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // jobtitle
@@ -143,7 +143,7 @@ public class MerchantJobDao extends AbstractDao<MerchantJob, Long> {
     public void readEntity(Cursor cursor, MerchantJob entity, int offset) {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
         entity.setDistance(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
-        entity.setEmail(cursor.isNull(offset + 2) ? null : cursor.getDouble(offset + 2));
+        entity.setEmail(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
         entity.setJobdetail(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
         entity.setJobstatus(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
         entity.setJobtitle(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));

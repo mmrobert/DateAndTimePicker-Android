@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "201917640611",
+    "firebase_url": "https://homearound-698c8.firebaseio.com",
+    "project_id": "homearound-698c8",
+    "storage_bucket": "homearound-698c8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:201917640611:android:d79f6df6b2b4db05",
+        "android_client_info": {
+          "package_name": "com.homearound.www.homearound"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "201917640611-eciutk8as5lkf254jg64n24uvpl0pnjk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.homearound.www.homearound",
+            "certificate_hash": "F90E54FF10210DFA028BFB6DD735E627EAA55156"
+          }
+        },
+        {
+          "client_id": "201917640611-771der80nlgtm0ifpqv65utuikt86n22.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAdbhDaEICoQbKB-v3uIG9nLn1NxoCE-4M"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "201917640611-771der80nlgtm0ifpqv65utuikt86n22.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

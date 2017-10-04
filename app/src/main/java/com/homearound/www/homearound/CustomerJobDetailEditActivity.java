@@ -1,19 +1,19 @@
 package com.homearound.www.homearound;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 
 public class CustomerJobDetailEditActivity extends AppCompatActivity {
-
-    private String jobDetail;
 
     private EditText etJobDetail;
 
@@ -25,11 +25,20 @@ public class CustomerJobDetailEditActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         Intent intent = getIntent();
-        jobDetail = intent.getStringExtra("jobdetail");
+        String jobDetail = intent.getStringExtra("jobdetail");
 
         etJobDetail = (EditText) findViewById(R.id.et_job_detail_edit_c);
 
         etJobDetail.setText(jobDetail);
+
+        RelativeLayout rel = (RelativeLayout)findViewById(R.id.rel_job_detail_edit_c);
+        rel.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                toDismissKeyBoard();
+                return true;
+            }
+        });
     }
 
     @Override
@@ -49,12 +58,14 @@ public class CustomerJobDetailEditActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_save_job_detail_c) {
             //       updateJobOnServer();
+            toDismissKeyBoard();
             Intent responseIntent = new Intent();
-            responseIntent.putExtra("newJobDetail", etJobDetail.getText().toString());
+            responseIntent.putExtra("newJobDetail", etJobDetail.getText().toString().trim());
             setResult(RESULT_OK, responseIntent);
             finish();
             return true;
         } else if (id == R.id.action_cancel_detail_edit_c) {
+            toDismissKeyBoard();
             finish();
             return true;
         }
@@ -62,4 +73,13 @@ public class CustomerJobDetailEditActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    private void toDismissKeyBoard() {
+      //  if (etJobDetail.hasFocus()) {
+        InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+        //   imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+        imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+        //   imm.hideSoftInputFromInputMethod(getCurrentFocus().getWindowToken(), 0);
+        //   Log.d("Black 5 25", getCurrentFocus().toString());
+       // }
+    }
 }

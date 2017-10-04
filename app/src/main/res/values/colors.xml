@@ -11,4 +11,7 @@
     <color name="colorDarkedGrey">#E6E2E0</color>
     <color name="colorRed210">#D20000</color>
     <color name="colorWhite">#FFFFFF</color>
+    <color name="colorRoyalBlue">#4169E1</color>
+    <color name="colorGreenBtn">#50BE50</color>
+    <color name="colorOrangeBtn">#FFA500</color>
 </resources>

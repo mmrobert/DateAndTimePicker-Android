@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_jobspostedM"
+            android:icon="@drawable/jobposted"
+            android:title="Jobs Posted" />
+        <item
+            android:id="@+id/nav_myjobsM"
+            android:icon="@drawable/briefcase"
+            android:title="My Jobs" />
+        <item
+            android:id="@+id/nav_messageboxM"
+            android:icon="@drawable/message_box"
+            android:title="Messages Box" />
+        <item
+            android:id="@+id/nav_rating_reviewM"
+            android:icon="@drawable/starrating"
+            android:title="Ratings and Reviews" />
+        <item
+            android:id="@+id/nav_contactusM"
+            android:icon="@drawable/contactus"
+            android:title="Contact Us" />
+        <item
+            android:id="@+id/nav_settingsM"
+            android:icon="@drawable/settings"
+            android:title="Settings" />
+        <item
+            android:id="@+id/nav_logoutM"
+            android:icon="@drawable/logout"
+            android:title="Log Out" />
+    </group>
+
+</menu>

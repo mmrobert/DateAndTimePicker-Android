@@ -1,17 +1,22 @@
 package com.homearound.www.homearound;
 
+import android.app.Activity;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
+import android.text.TextUtils;
+import android.util.Base64;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 public class CustomerNvDrawerActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -19,6 +24,8 @@ public class CustomerNvDrawerActivity extends AppCompatActivity
     NavigationView navigationView = null;
     Toolbar toolbar = null;
     DrawerLayout drawer = null;
+
+    private UserDefaultManager userDefaultManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,10 +35,10 @@ public class CustomerNvDrawerActivity extends AppCompatActivity
         FragmentMyJobsC fragmentMyJobsC = new FragmentMyJobsC();
         android.support.v4.app.FragmentTransaction fragmentTransaction =
                 getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.nv_fragment_holder, fragmentMyJobsC);
+        fragmentTransaction.replace(R.id.nv_fragment_holder_customer, fragmentMyJobsC);
         fragmentTransaction.commit();
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar_my_jobs_c);
+        toolbar = (Toolbar) findViewById(R.id.toolbar_customer_nv);
         setSupportActionBar(toolbar);
 /**
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -43,46 +50,50 @@ public class CustomerNvDrawerActivity extends AppCompatActivity
             }
         });
 */
-        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout_customer);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView = (NavigationView) findViewById(R.id.nav_view_customer);
         navigationView.setNavigationItemSelectedListener(this);
+
+        userDefaultManager = new UserDefaultManager(getApplicationContext());
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        navigationView = (NavigationView) findViewById(R.id.nav_view_customer);
+
+        View headerV = navigationView.getHeaderView(0);
+        TextView nameV = (TextView)headerV.findViewById(R.id.txt_profile_name_customer);
+        String nameStr = userDefaultManager.getUserName();
+        if (!TextUtils.isEmpty(nameStr)) {
+            nameV.setText(nameStr);
+        }
+
+        ImageView imgV =
+                (ImageView) headerV.findViewById(R.id.img_profile_photo_customer);
+
+        String strImg = userDefaultManager.getUserPhoto();
+        if (!TextUtils.isEmpty(strImg)) {
+            byte[] decodedByte = Base64.decode(strImg, Base64.DEFAULT);
+            Bitmap bitmapImg = BitmapFactory.decodeByteArray(decodedByte, 0, decodedByte.length);
+            imgV.setImageBitmap(bitmapImg);
+        }
     }
 
     @Override
     public void onBackPressed() {
-        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout_customer);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
         }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.customer_nv_drawer, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_create_new_job_c) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
@@ -96,24 +107,56 @@ public class CustomerNvDrawerActivity extends AppCompatActivity
             FragmentMyJobsC fragmentMyJobsC = new FragmentMyJobsC();
             android.support.v4.app.FragmentTransaction fragmentTransaction =
                     getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.nv_fragment_holder, fragmentMyJobsC);
+            fragmentTransaction.replace(R.id.nv_fragment_holder_customer, fragmentMyJobsC);
             fragmentTransaction.commit();
         } else if (id == R.id.nav_myservicesC) {
-
+            FragmentMyServiceC fragmentMyServiceC = new FragmentMyServiceC();
+            android.support.v4.app.FragmentTransaction fragmentTransaction =
+                    getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.nv_fragment_holder_customer, fragmentMyServiceC);
+            fragmentTransaction.commit();
         } else if (id == R.id.nav_messageboxC) {
-
+            FragmentMsgBoxC fragmentMsgBoxC = new FragmentMsgBoxC();
+            android.support.v4.app.FragmentTransaction fragmentTransaction =
+                    getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.nv_fragment_holder_customer, fragmentMsgBoxC);
+            fragmentTransaction.commit();
         } else if (id == R.id.nav_promotionsC) {
-
+            FragmentPromotionsC fragmentPromotionsC = new FragmentPromotionsC();
+            android.support.v4.app.FragmentTransaction fragmentTransaction =
+                    getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.nv_fragment_holder_customer, fragmentPromotionsC);
+            fragmentTransaction.commit();
         } else if (id == R.id.nav_contactusC) {
-
+            FragmentContactUsC fragmentContactUsC = new FragmentContactUsC();
+            android.support.v4.app.FragmentTransaction fragmentTransaction =
+                    getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.nv_fragment_holder_customer, fragmentContactUsC);
+            fragmentTransaction.commit();
         } else if (id == R.id.nav_settingsC) {
-
-        } else  if (id == R.id.nav_logoutC) {
-
+            FragmentSettingsC fragmentSettingsC = new FragmentSettingsC();
+            android.support.v4.app.FragmentTransaction fragmentTransaction =
+                    getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.nv_fragment_holder_customer, fragmentSettingsC);
+            fragmentTransaction.commit();
+        } else if (id == R.id.nav_logoutC) {
+            FragmentLogoutC fragmentLogoutC = new FragmentLogoutC();
+            android.support.v4.app.FragmentTransaction fragmentTransaction =
+                    getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.nv_fragment_holder_customer, fragmentLogoutC);
+            fragmentTransaction.commit();
         }
 
-        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout_customer);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void toDismissKeyBoard() {
+        InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+        //   imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+        imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+        //   imm.hideSoftInputFromInputMethod(getCurrentFocus().getWindowToken(), 0);
+        //   Log.d("Black 5 25", getCurrentFocus().toString());
     }
 }

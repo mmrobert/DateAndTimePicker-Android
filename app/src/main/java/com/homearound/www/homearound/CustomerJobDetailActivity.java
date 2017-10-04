@@ -1,19 +1,16 @@
 package com.homearound.www.homearound;
 
-import android.app.Dialog;
-import android.content.Context;
-import android.content.DialogInterface;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,6 +18,10 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
 import com.homearound.www.datetimepicker.DateTime;
 import com.homearound.www.datetimepicker.DateTimePicker;
 import com.homearound.www.datetimepicker.SimpleDateTimePicker;
@@ -28,8 +29,13 @@ import com.homearound.www.homearound.db.CustomerJob;
 import com.homearound.www.homearound.db.CustomerJobDao;
 import com.homearound.www.homearound.db.DaoSession;
 
+import org.json.JSONObject;
+
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 public class CustomerJobDetailActivity extends AppCompatActivity implements
         DialogFragmentMyJobsC.OnFragmentOkActionListener, DateTimePicker.OnDateTimeSetListener {
@@ -43,6 +49,7 @@ public class CustomerJobDetailActivity extends AppCompatActivity implements
     private String jobTitle;
     private String jobTimeFinish;
     private String jobDetail;
+    private String jobTimeCreated;
 
     private TextView tvJobStatus;
     private TextView tvJobCategory;
@@ -63,7 +70,7 @@ public class CustomerJobDetailActivity extends AppCompatActivity implements
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_job_detail_c);
         setSupportActionBar(toolbar);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+      //  getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Intent intent = getIntent();
         jobId = intent.getLongExtra("jobid", 0);
@@ -72,6 +79,7 @@ public class CustomerJobDetailActivity extends AppCompatActivity implements
         jobTitle = intent.getStringExtra("jobtitle");
         jobTimeFinish = intent.getStringExtra("jobtimefinish");
         jobDetail = intent.getStringExtra("jobdetail");
+        jobTimeCreated = intent.getStringExtra("jobtimecreated");
 
         tvJobStatus = (TextView)findViewById(R.id.job_detail_status_c);
         tvJobCategory = (TextView)findViewById(R.id.job_detail_category_c);
@@ -81,24 +89,37 @@ public class CustomerJobDetailActivity extends AppCompatActivity implements
 
         tvJobStatus.setText(jobStatus);
         tvJobCategory.setText(jobCategory);
-        tvJobTitle.setText(jobTitle);
-        tvJobTimeFinish.setText(jobTimeFinish);
-        tvJobDetail.setText(jobDetail);
+
+        if (!TextUtils.isEmpty(jobTitle)) {
+            tvJobTitle.setText(jobTitle);
+        }
+
+        if (!TextUtils.isEmpty(jobTimeFinish)) {
+            tvJobTimeFinish.setText(jobTimeFinish);
+        }
+
+        if (!TextUtils.isEmpty(jobDetail)) {
+            tvJobDetail.setText(jobDetail);
+        }
 
         tvJobStatusChange = (TextView)findViewById(R.id.job_detail_change_status_c);
 
         if (jobStatus.equals("Saved")) {
             tvJobStatusChange.setText("Post");
             tvJobStatusChange.setClickable(true);
+            tvJobStatusChange.setEnabled(true);
         } else if (jobStatus.equals("Posted")) {
             tvJobStatusChange.setText("Contract Out");
             tvJobStatusChange.setClickable(true);
+            tvJobStatusChange.setEnabled(true);
         } else if (jobStatus.equals("In Progress")) {
             tvJobStatusChange.setText("Complete");
             tvJobStatusChange.setClickable(true);
+            tvJobStatusChange.setEnabled(true);
         } else {
             tvJobStatusChange.setText("Take a Break");
             tvJobStatusChange.setClickable(false);
+            tvJobStatusChange.setEnabled(false);
         }
 
         tvJobStatusChange.setOnClickListener(new View.OnClickListener() {
@@ -132,7 +153,7 @@ public class CustomerJobDetailActivity extends AppCompatActivity implements
             public void onClick(View v) {
                 Date dateHere;
                 if (jobTimeFinish != null) {
-                    if (!(jobTimeFinish.isEmpty()) || !(jobTimeFinish.equals(" "))) {
+                    if (!(jobTimeFinish.isEmpty()) && !(jobTimeFinish.equals(" "))) {
                         String dateFormatHere = "yyyy-MM-dd HH:mm";
                         DateTime dateTimeHere = new DateTime(dateFormatHere, jobTimeFinish);
                         dateHere = dateTimeHere.getDate();
@@ -179,7 +200,11 @@ public class CustomerJobDetailActivity extends AppCompatActivity implements
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_update_job_c) {
-            updateJobOnServer();
+            if (jobStatus.equals("Saved")) {
+                updateJobDatabase();
+            } else {
+                updateJobOnServer();
+            }
             return true;
         } else if (id == R.id.action_cancel_jobupdate_c) {
             finish();
@@ -196,33 +221,90 @@ public class CustomerJobDetailActivity extends AppCompatActivity implements
         if (requestCode == JOB_DETAIL_TITLE_EDIT_C_REQUEST) {
             if (resultCode == RESULT_OK) {
                 String returnTitle = data.getStringExtra("newJobTitle");
-                jobTitle = returnTitle;
-                tvJobTitle.setText(returnTitle);
+                if (!TextUtils.isEmpty(returnTitle)) {
+                    jobTitle = returnTitle;
+                    tvJobTitle.setText(returnTitle);
+                }
             }
         } else if (requestCode == JOB_DETAIL_DETAIL_EDIT_C_REQUEST) {
             if (resultCode == RESULT_OK) {
                 String returnDetail = data.getStringExtra("newJobDetail");
-                jobDetail = returnDetail;
-                tvJobDetail.setText(returnDetail);
+                if (TextUtils.isEmpty(returnDetail)) {
+                    jobDetail = returnDetail;
+                    tvJobDetail.setText(returnDetail);
+                }
             }
         }
     }
 
     private void updateJobOnServer() {
-        updateJobDatabase();
+
+        final String TAG_NET = "UPDATE_JOB_JOB_DETAIL";
+
+        final ProgressDialog pDialog = new ProgressDialog(this);
+        pDialog.setMessage("Updating job...");
+        pDialog.show();
+
+        String url = HAApplication.getInstance().getUrlHttpHome() + "/customer/updatejob";
+
+        UserDefaultManager userDefaultManager = new UserDefaultManager(getApplicationContext());
+        String mToken = userDefaultManager.getUserToken();
+
+        Map<String, String> params = new HashMap<String, String>();
+
+        //  Log.d(TAG_NET, mEmail);
+        params.put("token", mToken);
+        params.put("createdtime", jobTimeCreated);
+        params.put("jobstatus", jobStatus);
+        params.put("jobtitle", jobTitle);
+        params.put("timetofinish", jobTimeFinish);
+        params.put("jobdetail", jobDetail);
+
+        InternetCustomRequest jsonReq = new InternetCustomRequest(Request.Method.POST, url, params,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        // Log.d(TAG_NET, mEmail);
+                        boolean success = response.optBoolean("success");
+                        String mMessage = response.optString("message");
+                        if (success) {
+                            pDialog.hide();
+                            updateJobDatabase();
+                            finish();
+                        } else {
+                            pDialog.hide();
+                            // String tempp = Boolean.toString(success);
+                            FragmentManager fm = getSupportFragmentManager();
+                            OkConfirmDialogFragment okFG = OkConfirmDialogFragment.newInstance(mMessage);
+                            okFG.show(fm, "Cheng");
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                pDialog.hide();
+                VolleyLog.d(TAG_NET, "Error: " + error.getMessage());
+            }
+        });
+        HAApplication.getInstance().addToRequestQueue(jsonReq, TAG_NET);
     }
 
     private void updateJobDatabase() {
         List<CustomerJob> customerjoblist = customerJobDao.queryBuilder()
                 .where(CustomerJobDao.Properties.Id.eq(jobId)).list();
-        CustomerJob jobHere = customerjoblist.get(0);
 
-        jobHere.setJobstatus(jobStatus);
-        jobHere.setJobtitle(jobTitle);
-        jobHere.setTimefinish(jobTimeFinish);
-        jobHere.setJobdetail(jobDetail);
+        if (customerjoblist != null) {
+            if (customerjoblist.size() > 0) {
+                CustomerJob jobHere = customerjoblist.get(0);
 
-        customerJobDao.update(jobHere);
+                jobHere.setJobstatus(jobStatus);
+                jobHere.setJobtitle(jobTitle);
+                jobHere.setTimefinish(jobTimeFinish);
+                jobHere.setJobdetail(jobDetail);
+
+                customerJobDao.update(jobHere);
+            }
+        }
     }
 
     private void changeJobStatusAct() {
@@ -271,12 +353,114 @@ public class CustomerJobDetailActivity extends AppCompatActivity implements
 
     private void updateJobPostOnServer() {
 
-        updateJobStatusForUI();
+        final String TAG_NET = "POST_JOB_JOB_DETAIL";
+
+        final ProgressDialog pDialog = new ProgressDialog(this);
+        pDialog.setMessage("Posting job...");
+        pDialog.show();
+
+        String url = HAApplication.getInstance().getUrlHttpHome() + "/customer/topostjob";
+
+        UserDefaultManager userDefaultManager = new UserDefaultManager(getApplicationContext());
+        String mToken = userDefaultManager.getUserToken();
+
+        Map<String, String> params = new HashMap<String, String>();
+
+        //  Log.d(TAG_NET, mEmail);
+        params.put("token", mToken);
+        params.put("jobcat", jobCategory);
+        params.put("createdtime", jobTimeCreated);
+        params.put("jobstatus", "Posted");
+        params.put("jobtitle", jobTitle);
+        params.put("timetofinish", jobTimeFinish);
+        params.put("jobdetail", jobDetail);
+
+        InternetCustomRequest jsonReq = new InternetCustomRequest(Request.Method.POST, url, params,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        // Log.d(TAG_NET, mEmail);
+                        boolean success = response.optBoolean("success");
+                        String mMessage = response.optString("message");
+                        if (success) {
+                            pDialog.hide();
+                            updateJobStatusForUI();
+                            updateJobDatabase();
+                        } else {
+                            pDialog.hide();
+                            // String tempp = Boolean.toString(success);
+                            FragmentManager fm = getSupportFragmentManager();
+                            OkConfirmDialogFragment okFG = OkConfirmDialogFragment.newInstance(mMessage);
+                            okFG.show(fm, "Cheng");
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                pDialog.hide();
+                VolleyLog.d(TAG_NET, "Error: " + error.getMessage());
+            }
+        });
+        HAApplication.getInstance().addToRequestQueue(jsonReq, TAG_NET);
     }
 
     private void updateJobStatusOnServer() {
 
-        updateJobStatusForUI();
+        final String TAG_NET = "UPDATE_JOB_STATUS_JOB_DETAIL";
+
+        final ProgressDialog pDialog = new ProgressDialog(this);
+        pDialog.setMessage("Updating job status...");
+        pDialog.show();
+
+        String url = HAApplication.getInstance().getUrlHttpHome() + "/customer/updatejobstatus";
+
+        UserDefaultManager userDefaultManager = new UserDefaultManager(getApplicationContext());
+        String mToken = userDefaultManager.getUserToken();
+
+        String newJobStatusString = "";
+
+        if (jobStatus.equals("Saved")) {
+            newJobStatusString = "Posted";
+        } else if (jobStatus.equals("Posted")) {
+            newJobStatusString = "In Progress";
+        } else if (jobStatus.equals("In Progress")) {
+            newJobStatusString = "Completed";
+        }
+
+        Map<String, String> params = new HashMap<String, String>();
+
+        //  Log.d(TAG_NET, mEmail);
+        params.put("token", mToken);
+        params.put("jobstatus", newJobStatusString);
+        params.put("createdtime", jobTimeCreated);
+
+        InternetCustomRequest jsonReq = new InternetCustomRequest(Request.Method.POST, url, params,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        // Log.d(TAG_NET, mEmail);
+                        boolean success = response.optBoolean("success");
+                        String mMessage = response.optString("message");
+                        if (success) {
+                            pDialog.hide();
+                            updateJobStatusForUI();
+                            updateJobDatabase();
+                        } else {
+                            pDialog.hide();
+                            // String tempp = Boolean.toString(success);
+                            FragmentManager fm = getSupportFragmentManager();
+                            OkConfirmDialogFragment okFG = OkConfirmDialogFragment.newInstance(mMessage);
+                            okFG.show(fm, "Cheng");
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                pDialog.hide();
+                VolleyLog.d(TAG_NET, "Error: " + error.getMessage());
+            }
+        });
+        HAApplication.getInstance().addToRequestQueue(jsonReq, TAG_NET);
     }
 
     private void updateJobStatusForUI() {
@@ -296,22 +480,76 @@ public class CustomerJobDetailActivity extends AppCompatActivity implements
         if (newJobStatusStr.equals("Posted")) {
             tvJobStatusChange.setText("Contract Out");
             tvJobStatusChange.setClickable(true);
+            tvJobStatusChange.setEnabled(true);
         } else if (newJobStatusStr.equals("In Progress")) {
             tvJobStatusChange.setText("Complete");
             tvJobStatusChange.setClickable(true);
+            tvJobStatusChange.setEnabled(true);
         } else {
             tvJobStatusChange.setText("Take a Break");
             tvJobStatusChange.setClickable(false);
+            tvJobStatusChange.setEnabled(false);
         }
 
         jobStatus = newJobStatusStr;
     }
 
     public void onDeleteJob() {
+
+        final String TAG_NET = "DELETE_JOB_JOB_DETAIL";
+
+        final ProgressDialog pDialog = new ProgressDialog(this);
+        pDialog.setMessage("Deleting job...");
+        pDialog.show();
+
+        String url = HAApplication.getInstance().getUrlHttpHome() + "/customer/deletejob";
+
+        UserDefaultManager userDefaultManager = new UserDefaultManager(getApplicationContext());
+        String mToken = userDefaultManager.getUserToken();
+
+        Map<String, String> params = new HashMap<String, String>();
+
+        //  Log.d(TAG_NET, mEmail);
+        params.put("token", mToken);
+        params.put("createdtime", jobTimeCreated);
+
+        InternetCustomRequest jsonReq = new InternetCustomRequest(Request.Method.POST, url, params,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        // Log.d(TAG_NET, mEmail);
+                        boolean success = response.optBoolean("success");
+                        String mMessage = response.optString("message");
+                        if (success) {
+                            pDialog.hide();
+                            deleteJobDatabase();
+                        } else {
+                            pDialog.hide();
+                            // String tempp = Boolean.toString(success);
+                            FragmentManager fm = getSupportFragmentManager();
+                            OkConfirmDialogFragment okFG = OkConfirmDialogFragment.newInstance(mMessage);
+                            okFG.show(fm, "Cheng");
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                pDialog.hide();
+                VolleyLog.d(TAG_NET, "Error: " + error.getMessage());
+            }
+        });
+        HAApplication.getInstance().addToRequestQueue(jsonReq, TAG_NET);
+    }
+
+    private void deleteJobDatabase() {
         List<CustomerJob> customerjoblist = customerJobDao.queryBuilder()
                 .where(CustomerJobDao.Properties.Id.eq(jobId)).list();
-        CustomerJob jobHere = customerjoblist.get(0);
-        customerJobDao.delete(jobHere);
+        if (customerjoblist != null) {
+            if (customerjoblist.size() > 0) {
+                CustomerJob jobHere = customerjoblist.get(0);
+                customerJobDao.delete(jobHere);
+            }
+        }
 
         finish();
     }
